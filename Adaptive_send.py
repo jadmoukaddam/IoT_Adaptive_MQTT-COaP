@@ -62,7 +62,7 @@ def sendmsg_MQTT(payload, qos):
 async def sendmsg():
     global packet_loss, mode
     payload = str(round(datetime.now(timezone.utc).timestamp(),6)).ljust(17,'0')
-    if mode== "MQTT" or (mode == "Adaptive" and packet_loss<0.3):
+    if mode== "MQTT" or (mode == "Adaptive" and packet_loss<0.25):
         sendmsg_MQTT(payload, 1)
     else:
          asyncio.create_task(sendmsg_CoAP(payload))
